@@ -2,25 +2,31 @@ import React, {useState} from "react";
 
 
 const Teamform = props =>{
-    const [title, settitle]=useState([
+    const [title, settitle]=useState(
      {  name: "",
         email: "",
         role: ""
-    }
-    ]);
+    });
     const changehandler =(event) =>{
         settitle({
             ...title, [event.target.name]: event.target.value
         })
     }
-
+const submithandler = (event) =>{
+        event.preventDefault()
+        props.setTe(title)
+        console.log("submitted")
+        settitle( {name: "",
+                  email: "",
+                  role: ""
+        })
+    }
     
     return(
         <div className="container">
     <h4>Add a team member</h4>
-        <form onSubmit={(event)=>{
-            event.preventDefault()
-        }}>
+        <form onSubmit = {submithandler}>
+        
             <label htmlFor="name">Name: </label>
             <div className="form-group">
             <input
